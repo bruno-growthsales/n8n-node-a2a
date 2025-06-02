@@ -1,19 +1,30 @@
 {
-  "name": "n8n-nodes-<...>",
+  "name": "n8n-nodes-a2a",
   "version": "0.1.0",
-  "description": "",
+  "description": "n8n community node for A2A (Account to Account) transfers and account management operations",
   "keywords": [
-    "n8n-community-node-package"
+    "n8n-community-node-package",
+    "a2a",
+    "account-to-account",
+    "transfers",
+    "banking",
+    "finance",
+    "payments",
+    "fintech",
+    "money-transfer"
   ],
   "license": "MIT",
-  "homepage": "",
+  "homepage": "https://github.com/your-username/n8n-nodes-a2a",
   "author": {
-    "name": "",
-    "email": ""
+    "name": "Your Name",
+    "email": "your-email@example.com"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/<...>/n8n-nodes-<...>.git"
+    "url": "https://github.com/your-username/n8n-nodes-a2a.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/n8n-nodes-a2a/issues"
   },
   "engines": {
     "node": ">=20.15"
@@ -33,10 +44,12 @@
   "n8n": {
     "n8nNodesApiVersion": 1,
     "credentials": [
+      "dist/credentials/A2aApi.credentials.js",
       "dist/credentials/ExampleCredentialsApi.credentials.js",
       "dist/credentials/HttpBinApi.credentials.js"
     ],
     "nodes": [
+      "dist/nodes/A2a/A2a.node.js",
       "dist/nodes/ExampleNode/ExampleNode.node.js",
       "dist/nodes/HttpBin/HttpBin.node.js"
     ]

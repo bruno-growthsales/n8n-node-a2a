@@ -1,0 +1,134 @@
+{
+  "name": "A2A Transfer Example",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "e0b63e52-4a0d-4f63-8d8c-9a8b7c6d5e4f",
+      "name": "When clicking 'Test Workflow'",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        820,
+        360
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "transfer",
+        "operation": "create",
+        "amount": 100.50,
+        "currency": "USD",
+        "fromAccountId": "acc_123456789",
+        "toAccountId": "acc_987654321",
+        "reference": "Transfer for services",
+        "description": "Monthly service payment"
+      },
+      "id": "c3f4a5b6-7d8e-9f0a-1b2c-3d4e5f6a7b8c",
+      "name": "Create A2A Transfer",
+      "type": "n8n-nodes-base.a2a",
+      "typeVersion": 1,
+      "position": [
+        1040,
+        360
+      ],
+      "credentials": {
+        "a2aApi": {
+          "id": "1",
+          "name": "A2A API credentials"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "transfer",
+        "operation": "get",
+        "transferId": "={{ $json.transfer_id }}"
+      },
+      "id": "d4e5f6a7-8b9c-0d1e-2f3a-4b5c6d7e8f9a",
+      "name": "Get Transfer Status",
+      "type": "n8n-nodes-base.a2a",
+      "typeVersion": 1,
+      "position": [
+        1260,
+        360
+      ],
+      "credentials": {
+        "a2aApi": {
+          "id": "1",
+          "name": "A2A API credentials"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "account",
+        "operation": "getBalance",
+        "accountId": "acc_123456789"
+      },
+      "id": "e5f6a7b8-9c0d-1e2f-3a4b-5c6d7e8f9a0b",
+      "name": "Check Source Account Balance",
+      "type": "n8n-nodes-base.a2a",
+      "typeVersion": 1,
+      "position": [
+        1040,
+        540
+      ],
+      "credentials": {
+        "a2aApi": {
+          "id": "1",
+          "name": "A2A API credentials"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "When clicking 'Test Workflow'": {
+      "main": [
+        [
+          {
+            "node": "Create A2A Transfer",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Check Source Account Balance",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create A2A Transfer": {
+      "main": [
+        [
+          {
+            "node": "Get Transfer Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {},
+  "versionId": "12345678-1234-1234-1234-123456789abc",
+  "id": "87654321-4321-4321-4321-210987654321",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "tags": [
+    {
+      "createdAt": "2024-06-02T20:00:00.000Z",
+      "updatedAt": "2024-06-02T20:00:00.000Z",
+      "id": "tag1",
+      "name": "finance"
+    },
+    {
+      "createdAt": "2024-06-02T20:00:00.000Z",
+      "updatedAt": "2024-06-02T20:00:00.000Z",
+      "id": "tag2",
+      "name": "transfers"
+    }
+  ]
+}

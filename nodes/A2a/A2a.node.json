@@ -1,0 +1,28 @@
+{
+	"node": "n8n-nodes-base.a2a",
+	"nodeVersion": "1.0",
+	"codexVersion": "1.0",
+	"categories": ["Finance", "Business", "Payment"],
+	"resources": {
+		"credentialDocumentation": [
+			{
+				"url": "https://docs.a2a.com/authentication"
+			}
+		],
+		"primaryDocumentation": [
+			{
+				"url": "https://docs.a2a.com/api"
+			}
+		],
+		"generic": [
+			{
+				"label": "Account to Account Transfers",
+				"url": "https://docs.a2a.com/transfers"
+			},
+			{
+				"label": "Account Management",
+				"url": "https://docs.a2a.com/accounts"
+			}
+		]
+	}
+}
