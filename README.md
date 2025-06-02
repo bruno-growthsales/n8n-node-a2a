@@ -15,15 +15,54 @@ A2A enables secure account-to-account transfers and comprehensive account manage
 [Usage Examples](#usage-examples)  
 [Resources](#resources)  
 
-## Installation
+## 🚀 Installation
 
-Follow the [installation guide](https://docs.n8n.io/integrations/community-nodes/installation/) in the n8n community nodes documentation.
+The A2A node can be installed using multiple methods:
 
-### Quick Install
+### Option 1: Via npm (Recommended)
 
 ```bash
+# In your n8n directory
 npm install n8n-nodes-a2a
+
+# Restart n8n
+pm2 restart n8n
 ```
+
+### Option 2: Automated Script
+
+```bash
+# Install from npm (default)
+curl -fsSL https://raw.githubusercontent.com/your-username/n8n-nodes-a2a/main/install-a2a-node.sh | bash
+
+# Install from GitHub
+curl -fsSL https://raw.githubusercontent.com/your-username/n8n-nodes-a2a/main/install-a2a-node.sh | bash -s -- --github
+```
+
+### Option 3: Manual Installation from GitHub
+
+```bash
+# In your n8n directory
+npm install https://github.com/your-username/n8n-nodes-a2a.git
+
+# Restart n8n
+pm2 restart n8n
+```
+
+### Option 4: Docker
+
+```dockerfile
+FROM n8nio/n8n:latest
+
+USER root
+RUN cd /usr/local/lib/node_modules/n8n && \
+    npm install n8n-nodes-a2a
+USER node
+```
+
+For detailed installation instructions including troubleshooting, see:
+- **Quick Guide**: [INSTALL_SELFHOST.md](INSTALL_SELFHOST.md)  
+- **Detailed Guide**: [docs/N8N_SELFHOST_INSTALL.md](docs/N8N_SELFHOST_INSTALL.md)
 
 ## Operations
 

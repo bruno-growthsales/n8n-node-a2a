@@ -21,7 +21,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/your-username/n8n-nodes-a2a.git"
+    "url": "git+https://github.com/your-username/n8n-nodes-a2a.git"
   },
   "bugs": {
     "url": "https://github.com/your-username/n8n-nodes-a2a/issues"
@@ -36,7 +36,7 @@
     "format": "prettier nodes credentials --write",
     "lint": "eslint nodes credentials package.json",
     "lintfix": "eslint nodes credentials package.json --fix",
-    "prepublishOnly": "npm build && npm lint -c .eslintrc.prepublish.js nodes credentials package.json"
+    "prepublishOnly": "npm run build && npm run lint -- -c .eslintrc.prepublish.js nodes credentials package.json"
   },
   "files": [
     "dist"
