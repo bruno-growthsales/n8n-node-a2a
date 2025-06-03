@@ -66,7 +66,7 @@ For detailed installation instructions including troubleshooting, see:
 
 ## Operations
 
-This node provides comprehensive A2A functionality through two main resources:
+This node provides comprehensive A2A functionality through three main resources:
 
 ### Transfer Resource
 - **Create Transfer**: Create a new account-to-account transfer
@@ -79,6 +79,11 @@ This node provides comprehensive A2A functionality through two main resources:
 - **List Accounts**: Get a list of accounts with filtering options
 - **Get Balance**: Get account balance information
 - **Get Transactions**: Get account transaction history with date filtering
+
+### Agent Resource (Google Agent2Agent Protocol)
+- **Send Message**: Send a message to an agent and receive complete response (tasks/send)
+- **Send Message with Streaming**: Send a message with real-time streaming response (tasks/sendSubscribe)
+- **Get Agent Card**: Retrieve agent capabilities from .well-known/agent-card endpoint
 
 ## Credentials
 
@@ -145,6 +150,114 @@ You need to authenticate with the A2A API using the following credentials:
   "startDate": "2024-01-01T00:00:00Z",
   "endDate": "2024-12-31T23:59:59Z",
   "transactionLimit": 100
+}
+```
+
+### Agent2Agent Protocol Examples
+
+#### Send Standard Message
+
+```javascript
+{
+  "resource": "agent",
+  "operation": "send",
+  "agentUrl": "https://agent-api.example.com",
+  "message": "Hello! Can you help me with my query?",
+  "sessionId": "session-123",
+  "taskId": "task-456"
+}
+```
+
+#### Send Message with Streaming
+
+```javascript
+{
+  "resource": "agent",
+  "operation": "sendSubscribe",
+  "agentUrl": "https://agent-api.example.com",
+  "message": "Please provide a detailed analysis...",
+  "sessionId": "session-123",
+  "taskId": "task-789",
+  "additionalOptions": {
+    "role": "user",
+    "timeout": 60000,
+    "headers": {
+      "parameter": [
+        {
+          "name": "X-Custom-Header",
+          "value": "custom-value"
+        }
+      ]
+    }
+  }
+}
+```
+
+#### Get Agent Capabilities
+
+```javascript
+{
+  "resource": "agent",
+  "operation": "getAgentCard",
+  "agentUrl": "https://agent-api.example.com"
+}
+```
+
+### JSON-RPC 2.0 Protocol
+
+The Agent resource implements the Google Agent2Agent protocol using JSON-RPC 2.0:
+
+#### Request Format
+```json
+{
+  "jsonrpc": "2.0",
+  "method": "tasks/send",
+  "params": {
+    "message": {
+      "role": "user",
+      "parts": [
+        {
+          "type": "text",
+          "text": "Your message here"
+        }
+      ]
+    },
+    "sessionId": "session-123",
+    "id": "task-456"
+  },
+  "id": "call-789"
+}
+```
+
+#### Success Response
+```json
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "status": {
+      "message": {
+        "parts": [
+          {
+            "type": "text",
+            "text": "Agent response here..."
+          }
+        ]
+      }
+    }
+  },
+  "id": "call-789"
+}
+```
+
+#### Error Response
+```json
+{
+  "jsonrpc": "2.0",
+  "error": {
+    "code": -32603,
+    "message": "Error message"
+  },
+  "id": "call-789"
 }
 ```
 
@@ -241,15 +354,21 @@ Import the example workflow from `examples/A2A_Example_Workflow.json` to see:
 * [A2A Authentication Guide](https://docs.a2a.com/authentication)
 * [Transfer API Reference](https://docs.a2a.com/transfers)
 * [Account API Reference](https://docs.a2a.com/accounts)
+* **Agent2Agent Protocol**:
+  * [Google A2A Repository](https://github.com/google/A2A)
+  * [A2A Testing Lab](https://a2a.to/)
+  * [Agent2Agent Protocol Documentation](docs/AGENT2AGENT_PROTOCOL.md)
+  * [JSON-RPC 2.0 Specification](https://www.jsonrpc.org/specification)
 
 ## Support
 
 For support and questions:
 
 1. **Documentation**: Check the [official A2A API docs](https://docs.a2a.com/api)
-2. **Issues**: Report bugs on [GitHub Issues](https://github.com/your-username/n8n-nodes-a2a/issues)
-3. **Community**: Join the [n8n community forum](https://community.n8n.io/)
+2. **Agent2Agent Protocol**: See [Agent2Agent Documentation](docs/AGENT2AGENT_PROTOCOL.md)
+3. **Issues**: Report bugs on [GitHub Issues](https://github.com/bruno-growthsales/n8n-nodes-a2a/issues)
+4. **Community**: Join the [n8n community forum](https://community.n8n.io/)
 
 ## License
 
-[MIT](https://github.com/your-username/n8n-nodes-a2a/blob/master/LICENSE.md)
+[MIT](https://github.com/bruno-growthsales/n8n-nodes-a2a/blob/master/LICENSE.md)

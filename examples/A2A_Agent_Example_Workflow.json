@@ -1,0 +1,172 @@
+{
+  "name": "A2A Agent Communication Example",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "3f4d8e2a-1b2c-3d4e-5f6a-789012345678",
+      "name": "When clicking \"Test Workflow\"",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        820,
+        360
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "agent",
+        "operation": "getAgentCard",
+        "agentUrl": "https://your-agent-api.example.com"
+      },
+      "id": "1a2b3c4d-5e6f-7g8h-9i0j-1k2l3m4n5o6p",
+      "name": "Get Agent Card",
+      "type": "n8n-nodes-a2a",
+      "typeVersion": 1,
+      "position": [
+        1040,
+        360
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "agent",
+        "operation": "send",
+        "agentUrl": "https://your-agent-api.example.com",
+        "message": "Hello! Can you help me understand the current weather conditions?",
+        "sessionId": "demo-session-123",
+        "taskId": "weather-query-001",
+        "additionalOptions": {
+          "role": "user",
+          "timeout": 30000,
+          "headers": {
+            "parameter": [
+              {
+                "name": "X-Custom-Header",
+                "value": "demo-value"
+              }
+            ]
+          }
+        }
+      },
+      "id": "2b3c4d5e-6f7g-8h9i-0j1k-2l3m4n5o6p7q",
+      "name": "Send Message to Agent",
+      "type": "n8n-nodes-a2a",
+      "typeVersion": 1,
+      "position": [
+        1260,
+        360
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "agent",
+        "operation": "sendSubscribe",
+        "agentUrl": "https://your-agent-api.example.com",
+        "message": "Please provide a detailed analysis of the latest market trends in technology stocks.",
+        "sessionId": "demo-session-123",
+        "taskId": "market-analysis-002",
+        "additionalOptions": {
+          "role": "user",
+          "timeout": 60000,
+          "includeMetadata": true
+        }
+      },
+      "id": "3c4d5e6f-7g8h-9i0j-1k2l-3m4n5o6p7q8r",
+      "name": "Send Message with Streaming",
+      "type": "n8n-nodes-a2a",
+      "typeVersion": 1,
+      "position": [
+        1480,
+        360
+      ]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "summary",
+              "value": "=Agent communication test completed successfully"
+            },
+            {
+              "name": "agent_card",
+              "value": "={{ $('Get Agent Card').item.json }}"
+            },
+            {
+              "name": "standard_response",
+              "value": "={{ $('Send Message to Agent').item.json }}"
+            },
+            {
+              "name": "streaming_response",
+              "value": "={{ $('Send Message with Streaming').item.json }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "4d5e6f7g-8h9i-0j1k-2l3m-4n5o6p7q8r9s",
+      "name": "Combine Results",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        1700,
+        360
+      ]
+    }
+  ],
+  "connections": {
+    "When clicking \"Test Workflow\"": {
+      "main": [
+        [
+          {
+            "node": "Get Agent Card",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Agent Card": {
+      "main": [
+        [
+          {
+            "node": "Send Message to Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Message to Agent": {
+      "main": [
+        [
+          {
+            "node": "Send Message with Streaming",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Message with Streaming": {
+      "main": [
+        [
+          {
+            "node": "Combine Results",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2024-01-15T10:30:00.000Z",
+  "versionId": "12345678-1234-5678-9abc-123456789012"
+}

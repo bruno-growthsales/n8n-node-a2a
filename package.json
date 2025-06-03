@@ -1,7 +1,7 @@
 {
   "name": "n8n-nodes-a2a",
-  "version": "0.1.0",
-  "description": "n8n community node for A2A (Account to Account) transfers and account management operations",
+  "version": "0.2.0",
+  "description": "n8n community node for A2A (Account to Account) transfers, account management, and Google Agent2Agent protocol communication",
   "keywords": [
     "n8n-community-node-package",
     "a2a",
@@ -11,20 +11,26 @@
     "finance",
     "payments",
     "fintech",
-    "money-transfer"
+    "money-transfer",
+    "agent2agent",
+    "google-a2a",
+    "jsonrpc",
+    "agent-communication",
+    "ai-agents",
+    "agent-protocol"
   ],
   "license": "MIT",
-  "homepage": "https://github.com/your-username/n8n-nodes-a2a",
+  "homepage": "https://github.com/bruno-growthsales/n8n-nodes-a2a",
   "author": {
-    "name": "Your Name",
-    "email": "your-email@example.com"
+    "name": "Bruno Growth Sales",
+    "email": "bruno@growthsales.com"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/your-username/n8n-nodes-a2a.git"
+    "url": "git+https://github.com/bruno-growthsales/n8n-nodes-a2a.git"
   },
   "bugs": {
-    "url": "https://github.com/your-username/n8n-nodes-a2a/issues"
+    "url": "https://github.com/bruno-growthsales/n8n-nodes-a2a/issues"
   },
   "engines": {
     "node": ">=20.15"
